@@ -1,0 +1,203 @@
+/* ── shared ─────────────────────────────────────────────── */
+
+.detail { padding-bottom: 6rem; }
+
+.detail__back-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.detail__back-link:hover { color: var(--color-text); }
+
+/* ── photo / film layout ────────────────────────────────── */
+
+.detail__back { padding-top: 2rem; margin-bottom: 2rem; }
+
+.detail__header {
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+}
+
+.detail__meta { display: flex; gap: 1rem; margin-bottom: 0.75rem; }
+
+.detail__year {
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+  letter-spacing: 0.05em;
+}
+
+.detail__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.detail__description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.detail__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.detail__tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  border: 1px solid var(--color-border);
+  padding: 3px 8px;
+}
+
+.detail__media { width: 100%; margin-top: 2rem; margin-bottom: 3rem; }
+
+.detail__image {
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  background: #f0f0ec;
+}
+
+.detail__video-wrap {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #111;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.detail__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── article layout (New Yorker style) ──────────────────── */
+
+.detail--article { padding-bottom: 8rem; }
+
+.article-back {
+  padding-top: 2rem;
+  margin-bottom: 0;
+}
+
+.article-column {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.article-header {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.article-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: 1.25rem;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.article-deck {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+}
+
+.article-byline {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.article-rule-wrap {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--color-text-faint);
+}
+
+.article-ornament {
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+}
+
+.article-cover {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  margin-bottom: 3rem;
+}
+
+/* article body prose */
+
+.article-body {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.85;
+  color: var(--color-text);
+}
+
+.article-body p {
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.article-body p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 0.8;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--color-text);
+}
+
+.article-body h2 {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 3rem 0 1.25rem;
+  text-align: center;
+}
+
+.article-body strong {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.article-body em { font-style: italic; }
