@@ -45,7 +45,7 @@ export default function Home() {
 
       <section className="home__feed container">
         {rest.map(project => (
-          <ProjectCard key={project._id} project={project} size="square" />
+          <ProjectCard key={project._id} project={project} size="normal" />
         ))}
       </section>
 
