@@ -1,15 +1,19 @@
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Nav.css'
 
 const links = [
-  { to: '/photography', label: 'Photography' },
   { to: '/film', label: 'Film' },
-  { to: '/articles', label: 'Articles' },
+  { to: '/photography', label: 'Photography' },
+  { to: '/articles-and-essays', label: 'Articles and Essays' },
   { to: '/about', label: 'About' },
 ]
 
 export default function Nav() {
   const { pathname } = useLocation()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => { setOpen(false) }, [pathname])
 
   return (
     <nav className="nav">
@@ -17,7 +21,17 @@ export default function Nav() {
         <Link to="/" className="nav__logo">
           Clouds on Paper
         </Link>
-        <ul className="nav__links">
+
+        <button
+          className={`nav__burger ${open ? 'nav__burger--open' : ''}`}
+          onClick={() => setOpen(o => !o)}
+          aria-label="Menu"
+          aria-expanded={open}
+        >
+          <span /><span /><span />
+        </button>
+
+        <ul className={`nav__links ${open ? 'nav__links--open' : ''}`}>
           {links.map(({ to, label }) => (
             <li key={to}>
               <Link

@@ -24,7 +24,7 @@ export const projects = [
     id: 3,
     title: "On Stillness",
     year: 2024,
-    category: "articles",
+    category: "articles-and-essays",
     description: "An essay on the relationship between photography and time — why the still image carries more urgency than motion ever could.",
     coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=90",
     featured: false,
@@ -56,7 +56,7 @@ export const projects = [
     id: 6,
     title: "Notes on Colour and Distance",
     year: 2023,
-    category: "articles",
+    category: "articles-and-essays",
     description: "How the painters taught me to see light differently — and what that means for working with a camera.",
     coverImage: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&q=90",
     featured: false,
@@ -75,4 +75,4 @@ export const projects = [
   },
 ]
 
-export const categories = ["all", "photography", "film", "articles"]
+export const categories = ["all", "photography", "film", "articles-and-essays"]

@@ -45,15 +45,19 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: start;
 }
 
 @media (max-width: 1024px) {
   .catpage__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+@media (max-width: 768px) {
+  .catpage__header  { padding-top: 2.5rem; padding-bottom: 2rem; margin-bottom: 2rem; }
+  .catpage          { padding-bottom: 4rem; }
+}
+
 @media (max-width: 600px) {
-  .catpage__grid { grid-template-columns: 1fr; }
-  .catpage__header { grid-template-columns: 1fr; }
-  .catpage__count { grid-column: 1; grid-row: 3; }
+  .catpage__grid          { grid-template-columns: 1fr; }
+  .catpage__header        { grid-template-columns: 1fr; }
+  .catpage__count         { grid-column: 1; grid-row: 3; }
 }

@@ -1,5 +1,6 @@
 .card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   transition: opacity 0.3s var(--ease-out);
 }
@@ -54,7 +55,9 @@
 
 .card:hover .card__play { opacity: 1; }
 
-.card__body { padding: 1rem 0 0; }
+.card__image-wrap { flex-shrink: 0; }
+
+.card__body { padding: 1rem 0 0; flex: 1; }
 
 .card__meta {
   display: flex;
@@ -87,6 +90,10 @@
   color: var(--color-text-muted);
   line-height: 1.6;
   margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }

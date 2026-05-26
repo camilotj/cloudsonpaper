@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+﻿import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import CategoryPage from './pages/CategoryPage'
@@ -13,13 +13,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/photography" element={<CategoryPage category="photography" />} />
-        <Route path="/photography/:id" element={<ProjectDetail />} />
+        <Route path="/photography/:slug" element={<ProjectDetail type="photography" />} />
         <Route path="/film" element={<CategoryPage category="film" />} />
-        <Route path="/film/:id" element={<ProjectDetail />} />
-        <Route path="/articles" element={<CategoryPage category="articles" />} />
-        <Route path="/articles/:id" element={<ProjectDetail />} />
+        <Route path="/film/:slug" element={<ProjectDetail type="film" />} />
+        <Route path="/articles-and-essays" element={<CategoryPage category="articles-and-essays" />} />
+        <Route path="/articles-and-essays/:slug" element={<ProjectDetail type="article" />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   )
 }
+

@@ -1,13 +1,55 @@
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { marked } from 'marked'
-import { projects } from '../data/projects'
+import { PortableText } from '@portabletext/react'
+import { fetchBySlug } from '../lib/queries'
+import { urlFor } from '../lib/sanityClient'
+import Lightbox from '../components/Lightbox'
 import './ProjectDetail.css'
 
-const articleFiles = import.meta.glob('../data/articles/*.md', { as: 'raw', eager: true })
+const backLinks = {
+  article:      { label: 'articles and essays', to: '/articles-and-essays' },
+  photography:  { label: 'photography',         to: '/photography' },
+  film:         { label: 'film',                to: '/film' },
+}
 
-export default function ProjectDetail() {
-  const { id } = useParams()
-  const project = projects.find(p => p.id === Number(id))
+function makePortableTextComponents(onImageClick) {
+  return {
+    types: {
+      image: ({ value }) => {
+        const displaySrc = urlFor(value).width(1200).quality(90).url()
+        const lightboxSrc = urlFor(value).width(3600).quality(95).url()
+        return (
+          <img
+            src={displaySrc}
+            alt={value.alt || ''}
+            className="article-inline-image"
+            onClick={() => onImageClick(lightboxSrc, value.alt || '')}
+            style={{ cursor: 'zoom-in' }}
+          />
+        )
+      },
+    },
+  }
+}
+
+export default function ProjectDetail({ type }) {
+  const { slug } = useParams()
+  const [project, setProject] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [lightbox, setLightbox] = useState(null)
+  const closeLightbox = useCallback(() => setLightbox(null), [])
+
+  useEffect(() => {
+    fetchBySlug(type, slug).then(data => {
+      setProject(data)
+      setLoading(false)
+    })
+  }, [type, slug])
+
+  const ptComponents = makePortableTextComponents((src, alt) => setLightbox({ src, alt }))
+  const back = backLinks[type]
+
+  if (loading) return <main className="detail container" />
 
   if (!project) return (
     <main className="detail container">
@@ -15,13 +57,14 @@ export default function ProjectDetail() {
     </main>
   )
 
-  if (project.category === 'articles') {
-    const raw = project.slug ? articleFiles[`../data/articles/${project.slug}.md`] : null
+  const isFilm = type === 'film'
 
-    return (
+  return (
+    <>
+      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
       <main className="detail detail--article">
         <div className="article-back container">
-          <Link to="/articles" className="detail__back-link">&#8592; articles</Link>
+          <Link to={back.to} className="detail__back-link">&#8592; {back.label}</Link>
         </div>
 
         <div className="article-column">
@@ -31,74 +74,62 @@ export default function ProjectDetail() {
             <p className="article-deck">{project.description}</p>
             <div className="article-byline">
               <span>{project.year}</span>
+              {project.readTime && <span>{project.readTime}</span>}
             </div>
           </header>
 
           <div className="article-rule-wrap" aria-hidden="true">
             <span className="article-ornament">&#10022;</span>
           </div>
+        </div>
 
-          {project.coverImage && (
+        {isFilm && project.youtubeId && (
+          <div className="film-video-section">
+            <div className="film-video-wrap">
+              <iframe
+                src={`https://www.youtube.com/embed/${project.youtubeId}`}
+                title={project.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="film-video"
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="article-column">
+          {!isFilm && project.coverImage && (
             <img
-              src={project.coverImage}
+              src={urlFor(project.coverImage).width(1560).quality(90).url()}
               alt={project.title}
               className="article-cover"
             />
           )}
 
-          {raw && (
-            <div
-              className="article-body"
-              dangerouslySetInnerHTML={{ __html: marked.parse(raw) }}
-            />
+          {project.body && (
+            <div className="article-body">
+              <PortableText value={project.body} components={ptComponents} />
+            </div>
+          )}
+
+          {project.gallery && project.gallery.length > 0 && (
+            <div className="article-gallery">
+              {project.gallery.map((img, i) => (
+                <img
+                  key={i}
+                  src={urlFor(img).width(1600).quality(90).url()}
+                  alt={`${project.title} ${i + 1}`}
+                  className="article-gallery__img"
+                  onClick={() => setLightbox({ src: urlFor(img).width(3600).quality(95).url(), alt: `${project.title} ${i + 1}` })}
+                  style={{ cursor: 'zoom-in' }}
+                />
+              ))}
+            </div>
           )}
         </div>
       </main>
-    )
-  }
-
-  return (
-    <main className="detail">
-      <div className="detail__back container">
-        <Link to={`/${project.category}`} className="detail__back-link">
-          &#8592; {project.category}
-        </Link>
-      </div>
-
-      <header className="detail__header container">
-        <div className="detail__meta">
-          <span className="detail__year">{project.year}</span>
-        </div>
-        <h1 className="detail__title">{project.title}</h1>
-        <p className="detail__description">{project.description}</p>
-        <div className="detail__tags">
-          {project.tags.map(tag => (
-            <span key={tag} className="detail__tag">{tag}</span>
-          ))}
-        </div>
-      </header>
-
-      <div className="detail__media">
-        {project.youtubeId ? (
-          <div className="detail__video-wrap">
-            <iframe
-              src={`https://www.youtube.com/embed/${project.youtubeId}`}
-              title={project.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="detail__video"
-            />
-          </div>
-        ) : (
-          <img
-            src={project.coverImage}
-            alt={project.title}
-            className="detail__image"
-          />
-        )}
-      </div>
-    </main>
+    </>
   )
 }
