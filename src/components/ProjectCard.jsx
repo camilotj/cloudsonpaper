@@ -24,16 +24,8 @@ export default function ProjectCard({ project, size = 'normal' }) {
         <span className="card__category">{categoryLabels[project.category] || project.category}</span>
       </div>
       <div className="card__body">
-        <div className="card__meta">
-          <span className="card__year">{project.year}</span>
-        </div>
+        <span className="card__year">{project.year}</span>
         <h2 className="card__title">{project.title}</h2>
-        <p className="card__description">{project.description}</p>
-        <div className="card__tags">
-          {project.tags.map(tag => (
-            <span key={tag} className="card__tag">{tag}</span>
-          ))}
-        </div>
       </div>
     </Link>
   )

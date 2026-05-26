@@ -12,7 +12,7 @@ export default function About() {
         <div className="about__body">
           <div className="about__image-col">
             <img
-              src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=90"
+              src=""
               alt="Portrait"
               className="about__portrait"
             />
