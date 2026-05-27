@@ -124,6 +124,7 @@
 @media (max-width: 768px) {
   .home__feed        { grid-template-columns: repeat(2, 1fr); }
   .home__section     { margin-top: 3.5rem; }
+  .hero__category    { display: none; }
 }
 
 @media (max-width: 480px) {
