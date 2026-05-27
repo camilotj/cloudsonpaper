@@ -1,5 +1,6 @@
 ﻿import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import CategoryPage from './pages/CategoryPage'
 import ProjectDetail from './pages/ProjectDetail'
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/articles-and-essays/:slug" element={<ProjectDetail type="article" />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

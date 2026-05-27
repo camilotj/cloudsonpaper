@@ -29,6 +29,11 @@ function makePortableTextComponents(onImageClick) {
         )
       },
     },
+    block: {
+      blockquote: ({ children }) => (
+        <blockquote className="article-pullquote">{children}</blockquote>
+      ),
+    },
   }
 }
 
@@ -73,8 +78,8 @@ export default function ProjectDetail({ type }) {
             <h1 className="article-title">{project.title}</h1>
             <p className="article-deck">{project.description}</p>
             <div className="article-byline">
+              {project.author && <span>By {project.author}</span>}
               <span>{project.year}</span>
-              {project.readTime && <span>{project.readTime}</span>}
             </div>
           </header>
 

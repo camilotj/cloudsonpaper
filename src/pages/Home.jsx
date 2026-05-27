@@ -5,6 +5,14 @@ import { urlFor } from '../lib/sanityClient'
 import ProjectCard from '../components/ProjectCard'
 import './Home.css'
 
+const SECTION_ORDER = ['film', 'photography', 'articles-and-essays']
+
+const sectionLabels = {
+  film: 'Film',
+  photography: 'Photography',
+  'articles-and-essays': 'Articles and Essays',
+}
+
 export default function Home() {
   const [projects, setProjects] = useState([])
 
@@ -13,6 +21,16 @@ export default function Home() {
   }, [])
 
   const [hero, ...rest] = projects
+
+  const grouped = {}
+  rest.forEach(p => {
+    if (!grouped[p.category]) grouped[p.category] = []
+    grouped[p.category].push(p)
+  })
+
+  const sections = SECTION_ORDER
+    .filter(cat => grouped[cat]?.length)
+    .map(cat => ({ category: cat, items: grouped[cat] }))
 
   return (
     <main className="home">
@@ -41,13 +59,18 @@ export default function Home() {
         </section>
       )}
 
-      <div className="home__rule" />
-
-      <section className="home__feed container">
-        {rest.map(project => (
-          <ProjectCard key={project._id} project={project} size="normal" />
-        ))}
-      </section>
+      {sections.map(({ category, items }) => (
+        <section key={category} className="home__section">
+          <div className="home__section-head container">
+            <h2 className="home__section-label">{sectionLabels[category]}</h2>
+          </div>
+          <div className="home__feed container">
+            {items.map(project => (
+              <ProjectCard key={project._id} project={project} size="normal" />
+            ))}
+          </div>
+        </section>
+      ))}
 
     </main>
   )

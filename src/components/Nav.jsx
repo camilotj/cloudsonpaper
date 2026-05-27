@@ -16,34 +16,39 @@ export default function Nav() {
   useEffect(() => { setOpen(false) }, [pathname])
 
   return (
-    <nav className="nav">
-      <div className="nav__inner container">
-        <Link to="/" className="nav__logo">
-          Clouds on Paper
-        </Link>
+    <>
+      <header className="masthead">
+        <div className="masthead__inner container">
+          <p className="masthead__est">Est. 2025</p>
+          <Link to="/" className="masthead__title">Clouds on Paper</Link>
+        </div>
+      </header>
 
-        <button
-          className={`nav__burger ${open ? 'nav__burger--open' : ''}`}
-          onClick={() => setOpen(o => !o)}
-          aria-label="Menu"
-          aria-expanded={open}
-        >
-          <span /><span /><span />
-        </button>
+      <nav className="nav">
+        <div className="nav__inner container">
+          <button
+            className={`nav__burger ${open ? 'nav__burger--open' : ''}`}
+            onClick={() => setOpen(o => !o)}
+            aria-label="Menu"
+            aria-expanded={open}
+          >
+            <span /><span /><span />
+          </button>
 
-        <ul className={`nav__links ${open ? 'nav__links--open' : ''}`}>
-          {links.map(({ to, label }) => (
-            <li key={to}>
-              <Link
-                to={to}
-                className={`nav__link ${pathname.startsWith(to) ? 'nav__link--active' : ''}`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+          <ul className={`nav__links ${open ? 'nav__links--open' : ''}`}>
+            {links.map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`nav__link ${pathname.startsWith(to) ? 'nav__link--active' : ''}`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </>
   )
 }

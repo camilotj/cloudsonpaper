@@ -4,6 +4,7 @@ export default {
   type: 'document',
   fields: [
     { name: 'title', title: 'Title', type: 'string' },
+    { name: 'author', title: 'Author', type: 'string' },
     { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' } },
     { name: 'publishedAt', title: 'Published At', type: 'datetime' },
     { name: 'description', title: 'Description (shown in cards and as subtitle)', type: 'text' },

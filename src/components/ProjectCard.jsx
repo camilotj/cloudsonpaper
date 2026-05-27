@@ -21,7 +21,6 @@ export default function ProjectCard({ project, size = 'normal' }) {
           className="card__image"
           loading="lazy"
         />
-        <span className="card__category">{categoryLabels[project.category] || project.category}</span>
       </div>
       <div className="card__body">
         <span className="card__year">{project.year}</span>

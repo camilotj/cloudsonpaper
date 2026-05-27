@@ -26,6 +26,7 @@ function normalize(doc) {
     body: doc.body || null,
     gallery: doc.gallery || [],
     readTime: doc.readTime || null,
+    author: doc.author || '',
   }
 }
 
@@ -39,7 +40,7 @@ const fullFields = `
   _id, _type, title,
   "slug": slug.current,
   publishedAt, coverImage, description, tags, youtubeId,
-  body, gallery, readTime
+  body, gallery, readTime, author
 `
 
 export async function fetchAll() {
