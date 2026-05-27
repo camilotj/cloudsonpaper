@@ -136,8 +136,8 @@
 
 .article-deck {
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 300;
+  font-size: 1.3rem;
+  font-weight: 400;
   font-style: italic;
   color: var(--color-text-muted);
   line-height: 1.55;
@@ -176,14 +176,14 @@
 
 .article-body {
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.9;
   color: var(--color-text);
 }
 
 .article-body p {
   margin-bottom: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .article-body p:first-child::first-letter {
@@ -277,8 +277,8 @@
 @media (max-width: 768px) {
   .detail--article        { padding-bottom: 5rem; }
   .article-header         { padding-top: 2.5rem; }
-  .article-deck           { font-size: 1.05rem; }
-  .article-body           { font-size: 1.05rem; }
+  .article-deck           { font-size: 1.15rem; }
+  .article-body           { font-size: 1.1rem; }
   .article-cover          { max-height: 340px; }
   .article-inline-image   { max-width: 80%; }
   .film-video-section     { margin-bottom: 2rem; }
