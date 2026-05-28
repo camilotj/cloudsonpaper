@@ -6,7 +6,7 @@ import './CategoryPage.css'
 const meta = {
   photography: { label: 'Photography' },
   film: { label: 'Film' },
-  'articles-and-essays': { label: 'Articles and Essays' },
+  'writing': { label: 'Writing' },
 }
 
 export default function CategoryPage({ category }) {

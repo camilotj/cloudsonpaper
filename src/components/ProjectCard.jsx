@@ -3,7 +3,7 @@ import { urlFor } from '../lib/sanityClient'
 import './ProjectCard.css'
 
 const categoryLabels = {
-  'articles-and-essays': 'Articles and Essays',
+  'writing': 'Writing',
   photography: 'Photography',
   film: 'Film',
 }

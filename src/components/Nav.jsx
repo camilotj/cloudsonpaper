@@ -5,7 +5,7 @@ import './Nav.css'
 const links = [
   { to: '/film', label: 'Film' },
   { to: '/photography', label: 'Photography' },
-  { to: '/articles-and-essays', label: 'Articles and Essays' },
+  { to: '/writing', label: 'Writing' },
   { to: '/about', label: 'About' },
 ]
 

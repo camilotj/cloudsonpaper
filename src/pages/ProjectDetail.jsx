@@ -7,7 +7,7 @@ import Lightbox from '../components/Lightbox'
 import './ProjectDetail.css'
 
 const backLinks = {
-  article:      { label: 'articles and essays', to: '/articles-and-essays' },
+  article:      { label: 'writing', to: '/writing' },
   photography:  { label: 'photography',         to: '/photography' },
   film:         { label: 'film',                to: '/film' },
 }

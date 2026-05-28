@@ -5,12 +5,12 @@ import { urlFor } from '../lib/sanityClient'
 import ProjectCard from '../components/ProjectCard'
 import './Home.css'
 
-const SECTION_ORDER = ['film', 'photography', 'articles-and-essays']
+const SECTION_ORDER = ['film', 'photography', 'writing']
 
 const sectionLabels = {
   film: 'Film',
   photography: 'Photography',
-  'articles-and-essays': 'Articles and Essays',
+  'writing': 'Writing',
 }
 
 export default function Home() {

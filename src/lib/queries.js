@@ -1,13 +1,13 @@
 import { client } from './sanityClient'
 
 export const categoryToType = {
-  'articles-and-essays': 'article',
+  'writing': 'article',
   photography: 'photography',
   film: 'film',
 }
 
 const typeToCategory = {
-  article: 'articles-and-essays',
+  article: 'writing',
   photography: 'photography',
   film: 'film',
 }

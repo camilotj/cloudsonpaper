@@ -17,8 +17,8 @@ export default function App() {
         <Route path="/photography/:slug" element={<ProjectDetail type="photography" />} />
         <Route path="/film" element={<CategoryPage category="film" />} />
         <Route path="/film/:slug" element={<ProjectDetail type="film" />} />
-        <Route path="/articles-and-essays" element={<CategoryPage category="articles-and-essays" />} />
-        <Route path="/articles-and-essays/:slug" element={<ProjectDetail type="article" />} />
+        <Route path="/writing" element={<CategoryPage category="writing" />} />
+        <Route path="/writing/:slug" element={<ProjectDetail type="article" />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
