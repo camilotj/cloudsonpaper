@@ -40,7 +40,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer__inner container">
         <div className="footer__left">
-          <p className="footer__tagline">A journal of image and language.</p>
+          <p className="footer__tagline">The Chronicles of Making Something.</p>
           <span className="footer__copy">© 2025 Camilo Tabares Jaramillo. All rights reserved.</span>
         </div>
         <nav className="footer__socials">

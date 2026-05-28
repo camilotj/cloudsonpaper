@@ -25,6 +25,7 @@ export default function ProjectCard({ project, size = 'normal' }) {
       <div className="card__body">
         <span className="card__year">{project.year}</span>
         <h2 className="card__title">{project.title}</h2>
+        {project.description && <p className="card__description">{project.description}</p>}
       </div>
     </Link>
   )
