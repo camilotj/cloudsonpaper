@@ -261,17 +261,21 @@
 
 /* ── photography gallery ─────────────────────────────────── */
 
-.article-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+.gallery-section {
   margin-top: 3rem;
+}
+
+.article-gallery {
+  column-count: 3;
+  column-gap: 1rem;
 }
 
 .article-gallery__img {
   width: 100%;
-  max-height: 480px;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -284,8 +288,12 @@
   .film-video-section     { margin-bottom: 2rem; }
 }
 
+@media (max-width: 768px) {
+  .article-gallery        { column-count: 2; }
+}
+
 @media (max-width: 600px) {
-  .article-gallery        { grid-template-columns: 1fr; }
+  .article-gallery        { column-count: 1; }
   .article-title          { font-size: clamp(1.75rem, 7vw, 2.5rem); }
   .article-body p:first-child::first-letter { font-size: 3.5rem; }
 }

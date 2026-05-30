@@ -7,9 +7,9 @@ import Lightbox from '../components/Lightbox'
 import './ProjectDetail.css'
 
 const backLinks = {
-  article:      { label: 'writing', to: '/writing' },
-  photography:  { label: 'photography',         to: '/photography' },
-  film:         { label: 'film',                to: '/film' },
+  article:      { label: 'writing',      to: '/writing' },
+  photography:  { label: 'photography',  to: '/photography' },
+  film:         { label: 'film',         to: '/film' },
 }
 
 function makePortableTextComponents(onImageClick) {
@@ -23,7 +23,7 @@ function makePortableTextComponents(onImageClick) {
             src={displaySrc}
             alt={value.alt || ''}
             className="article-inline-image"
-            onClick={() => onImageClick(lightboxSrc, value.alt || '')}
+            onClick={() => onImageClick([{ src: lightboxSrc, alt: value.alt || '' }], 0)}
             style={{ cursor: 'zoom-in' }}
           />
         )
@@ -42,7 +42,10 @@ export default function ProjectDetail({ type }) {
   const [project, setProject] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lightbox, setLightbox] = useState(null)
+
+  const openLightbox = useCallback((images, index) => setLightbox({ images, index }), [])
   const closeLightbox = useCallback(() => setLightbox(null), [])
+  const navLightbox = useCallback((index) => setLightbox(lb => ({ ...lb, index })), [])
 
   useEffect(() => {
     fetchBySlug(type, slug).then(data => {
@@ -51,7 +54,7 @@ export default function ProjectDetail({ type }) {
     })
   }, [type, slug])
 
-  const ptComponents = makePortableTextComponents((src, alt) => setLightbox({ src, alt }))
+  const ptComponents = makePortableTextComponents(openLightbox)
   const back = backLinks[type]
 
   if (loading) return <main className="detail container" />
@@ -64,9 +67,23 @@ export default function ProjectDetail({ type }) {
 
   const isFilm = type === 'film'
 
+  const galleryImages = project.gallery
+    ? project.gallery.map((img, i) => ({
+        src: urlFor(img).width(3600).quality(95).url(),
+        alt: `${project.title} ${i + 1}`,
+      }))
+    : []
+
   return (
     <>
-      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          index={lightbox.index}
+          onClose={closeLightbox}
+          onNav={navLightbox}
+        />
+      )}
       <main className="detail detail--article">
         <div className="article-back container">
           <Link to={back.to} className="detail__back-link">&#8592; {back.label}</Link>
@@ -118,22 +135,24 @@ export default function ProjectDetail({ type }) {
               <PortableText value={project.body} components={ptComponents} />
             </div>
           )}
+        </div>
 
-          {project.gallery && project.gallery.length > 0 && (
+        {galleryImages.length > 0 && (
+          <div className="gallery-section container">
             <div className="article-gallery">
               {project.gallery.map((img, i) => (
                 <img
                   key={i}
                   src={urlFor(img).width(1600).quality(90).url()}
-                  alt={`${project.title} ${i + 1}`}
+                  alt={galleryImages[i].alt}
                   className="article-gallery__img"
-                  onClick={() => setLightbox({ src: urlFor(img).width(3600).quality(95).url(), alt: `${project.title} ${i + 1}` })}
+                  onClick={() => openLightbox(galleryImages, i)}
                   style={{ cursor: 'zoom-in' }}
                 />
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </main>
     </>
   )
